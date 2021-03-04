@@ -1,12 +1,15 @@
--- Edit by Raag2005
--- MIT License
+--[[ 
+
+    - Edit by Raag2005
+    - Original https://github.com/brouznouf/fivem-mysql-async
+    - MIT License
+
+]]
 
 fx_version 'adamant'
 game 'common'
 
-description 'MySQL-Async edit by Raag2005'
 author 'Raag2005'
-version '1.0.0'
 url 'https://github.com/raag2005/mysql-async'
 
-server_script 'mysql-async.js'
+server_script 'mysql.min.js'
