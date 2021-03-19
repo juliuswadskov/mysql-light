@@ -6,3 +6,5 @@ Normaly the mysql-async is filled with html, and stuff you don't need so i remov
 Links:
   - **https://github.com/GHMatti/ghmattimysql**
   - **https://github.com/brouznouf/fivem-mysql-async**
+
+_Updated by Raag2005_
