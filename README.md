@@ -1,5 +1,5 @@
 # MySQL-Light
-to use it add this in your fxmanifest `server_script '@mysql-light/lib/mysql.min.lua'`
+to use it add this in your fxmanifest `server_script '@mysql-light/lib/MySQL.lua'`
 
 Normaly the mysql-async is filled with html, and stuff you don't need so i removed it a light verion of the original mysql-async by ghmatti
 
