@@ -30,7 +30,7 @@ function MySQL.Sync.execute(query, params)
 
     local res = 0
     local finishedQuery = false
-    exports['mysql-async']:mysql_execute(query, safeParameters(params), function (result)
+    exports['mysql-light']:mysql_execute(query, safeParameters(params), function (result)
         res = result
         finishedQuery = true
     end)
@@ -50,7 +50,7 @@ function MySQL.Sync.fetchAll(query, params)
 
     local res = {}
     local finishedQuery = false
-    exports['mysql-async']:mysql_fetch_all(query, safeParameters(params), function (result)
+    exports['mysql-light']:mysql_fetch_all(query, safeParameters(params), function (result)
         res = result
         finishedQuery = true
     end)
@@ -72,7 +72,7 @@ function MySQL.Sync.fetchScalar(query, params)
 
     local res = ''
     local finishedQuery = false
-    exports['mysql-async']:mysql_fetch_scalar(query, safeParameters(params), function (result)
+    exports['mysql-light']:mysql_fetch_scalar(query, safeParameters(params), function (result)
         res = result
         finishedQuery = true
     end)
@@ -93,7 +93,7 @@ function MySQL.Sync.insert(query, params)
 
     local res = 0
     local finishedQuery = false
-    exports['mysql-async']:mysql_insert(query, safeParameters(params), function (result)
+    exports['mysql-light']:mysql_insert(query, safeParameters(params), function (result)
         res = result
         finishedQuery = true
     end)
@@ -111,7 +111,7 @@ function MySQL.Sync.store(query)
 
     local res = -1
     local finishedQuery = false
-    exports['mysql-async']:mysql_store(query, function (result)
+    exports['mysql-light']:mysql_store(query, function (result)
         res = result
         finishedQuery = true
     end)
@@ -130,7 +130,7 @@ end
 function MySQL.Sync.transaction(querys, params)
     local res = 0
     local finishedQuery = false
-    exports['mysql-async']:mysql_transaction(querys, params, function (result)
+    exports['mysql-light']:mysql_transaction(querys, params, function (result)
         res = result
         finishedQuery = true
     end)
@@ -148,7 +148,7 @@ end
 function MySQL.Async.execute(query, params, func)
     assert(type(query) == "string" or type(query) == "number", "The SQL Query must be a string")
 
-    exports['mysql-async']:mysql_execute(query, safeParameters(params), func)
+    exports['mysql-light']:mysql_execute(query, safeParameters(params), func)
 end
 
 ---
@@ -161,7 +161,7 @@ end
 function MySQL.Async.fetchAll(query, params, func)
     assert(type(query) == "string" or type(query) == "number", "The SQL Query must be a string")
 
-    exports['mysql-async']:mysql_fetch_all(query, safeParameters(params), func)
+    exports['mysql-light']:mysql_fetch_all(query, safeParameters(params), func)
 end
 
 ---
@@ -175,7 +175,7 @@ end
 function MySQL.Async.fetchScalar(query, params, func)
     assert(type(query) == "string" or type(query) == "number", "The SQL Query must be a string")
 
-    exports['mysql-async']:mysql_fetch_scalar(query, safeParameters(params), func)
+    exports['mysql-light']:mysql_fetch_scalar(query, safeParameters(params), func)
 end
 
 ---
@@ -188,7 +188,7 @@ end
 function MySQL.Async.insert(query, params, func)
     assert(type(query) == "string" or type(query) == "number", "The SQL Query must be a string")
 
-    exports['mysql-async']:mysql_insert(query, safeParameters(params), func)
+    exports['mysql-light']:mysql_insert(query, safeParameters(params), func)
 end
 
 ---
@@ -200,7 +200,7 @@ end
 function MySQL.Async.store(query, func)
     assert(type(query) == "string", "The SQL Query must be a string")
 
-    exports['mysql-async']:mysql_store(query, func)
+    exports['mysql-light']:mysql_store(query, func)
 end
 
 ---
@@ -211,16 +211,16 @@ end
 -- @param func(bool)
 --
 function MySQL.Async.transaction(querys, params, func)
-    return exports['mysql-async']:mysql_transaction(querys, params, func)
+    return exports['mysql-light']:mysql_transaction(querys, params, func)
 end
 
 function MySQL.ready (callback)
     Citizen.CreateThread(function ()
         -- add some more error handling
-        while GetResourceState('mysql-async') ~= 'started' do
+        while GetResourceState('mysql-light') ~= 'started' do
             Citizen.Wait(0)
         end
-        while not exports['mysql-async']:is_ready() do
+        while not exports['mysql-light']:is_ready() do
             Citizen.Wait(0)
         end
         callback()
